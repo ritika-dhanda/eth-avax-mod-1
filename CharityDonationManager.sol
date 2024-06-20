@@ -9,7 +9,7 @@ contract CharityDonationManager {
     event DonationUpdated(address indexed donor, uint amount);
 
     // Function to donate with require error handling
-    function donateWithRequire(uint _amount) public {
+    function donateWithRequire(uint _amount) public {//used to validate input conditions
         require(_amount > 0, "Donation amount must be positive");
         donations[msg.sender] += _amount;
         totalDonations += _amount;
@@ -17,7 +17,7 @@ contract CharityDonationManager {
     }
 
     // Function to update donation with assert error handling
-    function updateDonationWithAssert(uint _amount) public {
+    function updateDonationWithAssert(uint _amount) public {//used to check for internal errors,used for conditions that should never be false
         assert(_amount > 0);
         uint previousDonation = donations[msg.sender];
         donations[msg.sender] = _amount;
@@ -26,7 +26,7 @@ contract CharityDonationManager {
     }
 
     // Function to donate with revert error handling
-    function donateWithRevert(uint _amount) public {
+    function donateWithRevert(uint _amount) public {//used to revert the transaction , due to requirement violation    
         if (_amount <= 0) {
             revert("Donation amount must be positive");
         }
@@ -40,3 +40,4 @@ contract CharityDonationManager {
         return donations[_donor];
     }
 }
+
